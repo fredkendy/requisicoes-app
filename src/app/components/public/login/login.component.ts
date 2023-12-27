@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   email!: string;
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       //com o objeto authServ, invocamos o método de login
       this.authServ.login(this.email, this.senha)
         .then(() => {
-          this.router.navigate(['/admin/painel'])
+          this.router.navigate(['/admin/menu'])
         })
         //tratando exceções com o catch (com switch, pode-se verificar os tipos de erros que podem surgir ao logar no firebase)
         .catch(erro => {

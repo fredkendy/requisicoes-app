@@ -13,10 +13,14 @@ import firebase from 'firebase/compat/app';
 })
 export class AuthenticationService {
 
-  private user: Observable<firebase.User | null> ;
+  private user: Observable<firebase.User | null>;
 
   constructor(private afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
+  }
+
+  authUser(): Observable<firebase.User | null> {
+    return this.user;
   }
 
   //passamos 2 argumentos para a classe que injetamos no construtor

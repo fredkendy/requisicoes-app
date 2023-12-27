@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import firebase from 'firebase/compat'
 
 //Teste primeng
 import { CalendarModule } from 'primeng/calendar'
@@ -17,12 +18,14 @@ import { LoginComponent } from './components/public/login/login.component';
 
 //Formularios
 import { FormsModule } from '@angular/forms';
+import { MenuComponent } from './components/admin/menu/menu.component';
 
 //Agrupa componentes, diretivas e serviços
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
