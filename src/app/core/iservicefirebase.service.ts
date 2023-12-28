@@ -23,6 +23,7 @@ export abstract class ServiceFirebase<T extends Model> implements ICrud<T> {
     return this.ref.valueChanges()
   }
 
+  //decide se é inserção ou atualização baseado na existencia de um valor para o id
   createOrUpdate(item: T): Promise<any> {
     let id = item.id;
     if (!item)

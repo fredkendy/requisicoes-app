@@ -10,7 +10,9 @@ const routes: Routes = [
   //importação dinamica: util para carregar modulo sob demanda
   //se o user estiver logado, a url raiz será do componente painel. Se n, o metodo retorna false (rota do componente login)
   {path: 'admin/painel', loadChildren: () => import('./components/admin/painel/painel.module')
-    .then(m => m.PainelModule), canActivate: [AuthguardService]}
+    .then(m => m.PainelModule), canActivate: [AuthguardService]},
+  {path: 'admin/departamento', loadChildren: () => import('./components/admin/departamento/departamento.module')
+    .then(m => m.DepartamentoModule), canActivate: [AuthguardService]}
 ];
 
 @NgModule({
