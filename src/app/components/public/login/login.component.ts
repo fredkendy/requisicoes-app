@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       //com o objeto authServ, invocamos o método de login
       this.authServ.login(this.email, this.senha)
         .then(() => {
-          this.router.navigate(['/admin/menu'])
+          this.router.navigate(['/admin/painel'])
         })
         //tratando exceções com o catch (com switch, pode-se verificar os tipos de erros que podem surgir ao logar no firebase)
         .catch(erro => {
