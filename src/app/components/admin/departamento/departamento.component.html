@@ -1,1 +1,74 @@
-<p>departamento works!</p>
+<div class="col col-lg-12 col-centered">
+  <div class="card col-lg-12 bg-light col-centered">
+    <div class="card-header">
+      <h3>
+        Departamentos
+        <button type="button" style="margin-right: 0px" (click)="add()" class="text-right btn btn-outline-info btn-lg">
+          +
+        </button>
+      </h3>
+    </div>
+    <div class="card-body col-lg-12 col-centered">
+      <table class="table table-striped table-hover table-bordered col-centered">
+        <thead class="thead-dark">
+          <tr>
+            <th class="text-center">Nome</th>
+            <th class="text-center">Telefone</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let departamento of departamentos$ | async">
+            <td class="text-center">{{ departamento.nome }} </td>
+            <td class="text-center">{{ departamento.telefone }} </td>
+            <td class="text-center">
+              <!-- responsável pela edição -->
+              <button type="button" (click)="selecionaDepartamento(departamento)" class="btn btn-success">
+                #
+              </button>
+              <button type="button" (click)="delete(departamento)" class="btn btn-danger">
+                X
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+
+      <div class="text-center">
+        <a [routerLink]="['/admin/painel']" class="btn btn-primary">
+          <i class="fa fa-search" aria-hidden="true"></i>Voltar
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Dialog com o formulário para capturar dados, tanto para inclusão, quanto para edição dos departamentos -->
+<!-- Atribuimos a variavel displayDialogDepartamento a propriedade visible (definida na classe) -->
+<p-dialog header="Dados do departamento" [style]="{ width: '80vw' }" [contentStyle]="{'overflow':'visible'}"
+  [(visible)]="displayDialogDepartamento" [responsive]="true" [modal]="true">
+  <!-- *ngIf para evitar erros na renderização do componente -->
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="form.value">
+    <!-- associamos o formulario ao FromGroup da classe -->
+    <form [formGroup]="form" class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+        <label for="nome">Nome*:</label>
+        <input type="text" pInputText formControlName="nome" />
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <label for="telefone">Telefone:</label>
+        <!-- como se fosse um placeholder -->
+        <input formControlName="telefone" />
+      </div>
+    </form>
+  </div>
+
+  <div class="p-d-flex p-jc-end">
+    <!-- botão fica disponível apenas se o estado do formulário for válido -->
+    <button [disabled]="!form.valid" type="button" class="btn btn-primary" (click)="save()">
+      <i class="fas fa-check-circle"></i> {{edit ? 'Atualizar' : 'Salvar'}}
+    </button>
+  </div>
+</p-dialog>

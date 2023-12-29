@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Requisicao } from '../models/requisicao.model';
-import { ServiceFirebase } from '../core/iservicefirebase.service';
+import { ServiceFirebase } from '../core/servicefirebase.service';
 
 @Injectable({
   providedIn: 'root'
