@@ -12,7 +12,9 @@ const routes: Routes = [
   {path: 'admin/painel', loadChildren: () => import('./components/admin/painel/painel.module')
     .then(m => m.PainelModule), canActivate: [AuthguardService]},
   {path: 'admin/departamento', loadChildren: () => import('./components/admin/departamento/departamento.module')
-    .then(m => m.DepartamentoModule), canActivate: [AuthguardService]}
+    .then(m => m.DepartamentoModule), canActivate: [AuthguardService]},
+  {path: 'admin/funcionario', loadChildren: () => import('./components/admin/funcionario/funcionario.module')
+    .then(m => m.FuncionarioModule), canActivate: [AuthguardService]}
 ];
 
 @NgModule({
