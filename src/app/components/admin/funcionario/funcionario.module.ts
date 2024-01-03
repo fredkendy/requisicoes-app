@@ -7,15 +7,28 @@ import { FuncionarioComponent } from './funcionario.component';
 //facilitar operações com campos do tipo dropdown
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+
+//Declarando o pipe (filtro)
+import { FilterDepartamentoPipe } from '../../../pipes/filter-departamento.pipe';
+
 
 @NgModule({
   declarations: [
-    FuncionarioComponent
+    FuncionarioComponent,
+    FilterDepartamentoPipe
   ],
   imports: [
     CommonModule,
     FuncionarioRoutingModule,
-    NgSelectModule
+    NgSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DialogModule
+  ],
+  providers: [
+    FilterDepartamentoPipe
   ]
 })
 export class FuncionarioModule { }
