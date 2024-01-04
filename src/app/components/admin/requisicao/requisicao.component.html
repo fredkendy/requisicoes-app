@@ -48,7 +48,11 @@
   
       </div>
     </div>
-  </div>
+</div>
+
+<!-- responsável pela renderização do componente movimentacao. ngIf para evitar erros de renderização -->
+<!-- atributo [funcionarioLogado] para conectar componentes pai-filho -->
+<app-movimentacao *ngIf="funcionarioLogado" [funcionarioLogado]="funcionarioLogado"></app-movimentacao>
 
 <p-dialog header="Dados da Requisição" [style]="{ width: '80vw' }" [contentStyle]="{'overflow':'visible'}"
   [(visible)]="displayDialogRequisicao" [responsive]="true" [modal]="true">

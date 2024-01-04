@@ -10,9 +10,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 
+import { MovimentacaoComponent } from '../movimentacao/movimentacao.component';
+
 @NgModule({
   declarations: [
-    RequisicaoComponent
+    RequisicaoComponent,
+    MovimentacaoComponent //componente filho
   ],
   imports: [
     CommonModule,
