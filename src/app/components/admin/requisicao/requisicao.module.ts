@@ -11,11 +11,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 
 import { MovimentacaoComponent } from '../movimentacao/movimentacao.component';
+import { ListaComponent } from '../movimentacao/lista/lista.component';
 
 @NgModule({
   declarations: [
     RequisicaoComponent,
-    MovimentacaoComponent //componente filho
+    MovimentacaoComponent, //componente filho
+    ListaComponent
   ],
   imports: [
     CommonModule,

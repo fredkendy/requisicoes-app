@@ -88,3 +88,9 @@
     </button>
   </div>
 </p-dialog>
+
+<!-- movimentacao: pai de app-lista -->
+<!-- vinculamos os valores da classe pai aos atributos de entrada [displayDialogMovimentacoes], [movimentacoes], [requisicaoSelecionada] e ao de saída em (displayChange) da classe filho lista.component.ts -->
+<app-lista [displayDialogMovimentacoes]="displayDialogMovimentacoes" [movimentacoes]="movimentacoes"
+  [requisicaoSelecionada]="requisicaoSelecionada" [funcionarioLogado]="funcionarioLogado"
+  (displayChange)="onDialogClose($event)"></app-lista>

@@ -50,7 +50,8 @@
     </div>
 </div>
 
-<!-- responsável pela renderização do componente movimentacao. ngIf para evitar erros de renderização -->
+<!-- Requisicao: componente pai -->
+<!-- responsável pela renderização do componente movimentacao (filho). ngIf para evitar erros de renderização -->
 <!-- atributo [funcionarioLogado] para conectar componentes pai-filho -->
 <app-movimentacao *ngIf="funcionarioLogado" [funcionarioLogado]="funcionarioLogado"></app-movimentacao>
 

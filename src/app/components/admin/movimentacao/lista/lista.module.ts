@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgSelectModule } from '@ng-select/ng-select';
 
-import { MovimentacaoRoutingModule } from './movimentacao-routing.module';
+import { ListaRoutingModule } from './lista-routing.module';
 
 //corrigindo erros do p-dialog
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-
-
 
 
 @NgModule({
@@ -17,10 +14,9 @@ import { DialogModule } from 'primeng/dialog';
   ],
   imports: [
     CommonModule,
-    MovimentacaoRoutingModule,
-    NgSelectModule,
+    ListaRoutingModule,
     ReactiveFormsModule,
     DialogModule
   ]
 })
-export class MovimentacaoModule { }
+export class ListaModule { }
