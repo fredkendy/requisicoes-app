@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Departamento } from '../../../models/departamento.model';
@@ -6,6 +6,7 @@ import { Funcionario } from '../../../models/funcionario.model';
 import { DepartamentoService } from '../../../services/departamento.service';
 import { FuncionarioService } from '../../../services/funcionario.service';
 import Swal from 'sweetalert2';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-funcionario',
@@ -14,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class FuncionarioComponent implements OnInit {
   
-  //mesmos objetos do componente departamento (ex: departamentos$ e departamentoFiltro) 
+  //mesmos objetos do componente departamento (ex: departamentos$ e departamentoFiltro)
   funcionarios$!: Observable<Funcionario[]>;
   departamentos$!: Observable<Departamento[]>;
   //filtro na tabeela por departamento
@@ -23,12 +24,21 @@ export class FuncionarioComponent implements OnInit {
   displayDialogFuncionario!: boolean;
   form!: FormGroup;
 
+  //Para upload de fotos no storage firebase
+  //ViewChild para acessar o componente. Static verifica os resultados da consulta antes da execução de detecção de alteração no componente
+  @ViewChild('inputFile', { static: false }) inputFile!: ElementRef; //referencia ao template
+  uploadPercent!: Observable<number | undefined>; 
+  downloadURL!: Observable<string>; //captura o endereço do recurso no servidor
+  task!: AngularFireUploadTask; //interface para tarefas no storage
+  complete!: boolean;
+
   //injeta os dois serviços e a classe que utilizamos para o formulario
   constructor(
     //private storage: AngularFireStorage,
     private funcionarioService: FuncionarioService,
     private departamentoService: DepartamentoService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private storage: AngularFireStorage) { }
 
   //carregamos funcionarios e departamentos dos serviços de list() para exibir no template
   ngOnInit() {
@@ -94,6 +104,27 @@ export class FuncionarioComponent implements OnInit {
           })
       }
     })
+  }
+
+  //event vindo do template
+  //@ts-ignore
+  async upload(event) {
+    this.complete = false;
+    //recupera o arquivo com o objeto file
+    const file = event.target.files[0];
+    const path = `funcionarios/${new Date().getTime().toString()}`;
+    const fileRef = this.storage.ref(path);
+    this.task = this.storage.upload(path, file);
+    this.task.then(up => {
+      fileRef.getDownloadURL().subscribe(url => {
+        this.complete = true;
+        this.form.patchValue({
+          foto: url
+        })
+      });
+    });
+    this.uploadPercent = this.task.percentageChanges();
+    this.inputFile.nativeElement.value = '';
   }
 
 }
